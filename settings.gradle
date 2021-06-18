@@ -1,0 +1,2 @@
+rootProject.name = "Youtube Layout"
+include ':app'
