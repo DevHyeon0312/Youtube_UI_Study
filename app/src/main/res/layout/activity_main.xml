@@ -13,7 +13,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@android:color/black">
+            android:background="@color/dark_over">
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -38,6 +38,7 @@
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/dark_over"
             android:layout_gravity="bottom">
 
             <com.devhyeon.youtubelayout.customviews.YoutubeBottomNavigationView
@@ -46,6 +47,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="16dp"
                 app:elevation="0dp"
+                app:itemIconTint="@color/white"
+                app:itemTextColor="@color/white"
                 app:labelVisibilityMode="labeled"
                 android:background="@android:color/transparent"
                 app:menu="@menu/bottom_nav_menu" />
@@ -57,7 +60,11 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:backgroundTint="@color/dark_over"
             android:contentDescription="@string/app_name"
+            app:tint="@android:color/white"
+            android:scaleType="center"
+            app:maxImageSize="45dp"
             android:src="@drawable/ic_add"
             app:layout_anchor="@id/bottomAppBar" />
 
