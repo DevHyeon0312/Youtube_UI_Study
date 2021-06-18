@@ -18,6 +18,7 @@ import com.devhyeon.youtubelayout.ui.fragments.SearchFragment
 import com.devhyeon.youtubelayout.viewmodels.BottomNavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/** 메인 Activity */
 class MainActivity : AppCompatActivity() {
     companion object {
         private val TAG = MainActivity::class.java.name
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    //화면에 보여줄 Fragment
+    //Bottom Navigation Select Item 에 따라 화면에 보여줄 Fragment
     private val homeFragment        by lazy { HomeFragment() }
     private val searchFragment      by lazy { SearchFragment() }
     private val favoriteFragment    by lazy { FavoriteFragment() }

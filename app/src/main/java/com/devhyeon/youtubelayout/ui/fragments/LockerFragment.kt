@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.devhyeon.youtubelayout.databinding.FragmentLockerBinding
 
+/** 보관함 Fragment */
 class LockerFragment: Fragment() {
     companion object {
         private val TAG = LockerFragment::class.java.name

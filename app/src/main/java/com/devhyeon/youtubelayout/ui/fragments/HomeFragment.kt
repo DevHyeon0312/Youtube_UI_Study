@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.devhyeon.youtubelayout.databinding.FragmentHomeBinding
 
+/** 홈 Fragment */
 class HomeFragment: Fragment() {
     companion object {
         private val TAG = HomeFragment::class.java.name

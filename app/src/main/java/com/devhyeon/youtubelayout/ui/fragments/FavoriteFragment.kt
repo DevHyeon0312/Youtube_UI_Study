@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.devhyeon.youtubelayout.databinding.FragmentFavoriteBinding
 
+/** 구독 Fragment */
 class FavoriteFragment: Fragment() {
     companion object {
         private val TAG = FavoriteFragment::class.java.name

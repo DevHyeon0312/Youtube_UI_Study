@@ -5,6 +5,9 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+/** Custom Navigation View
+ * 총 5개의 Item 중 (0,1,2,3,4) 중앙에 해당하는 아이템을 비활성화 하기 위함.
+ * */
 class YoutubeBottomNavigationView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BottomNavigationView(context, attrs, defStyleAttr) {

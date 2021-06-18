@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.devhyeon.youtubelayout.databinding.FragmentSearchBinding
 
+/** 탐색 Fragment */
 class SearchFragment: Fragment() {
     companion object {
         private val TAG = SearchFragment::class.java.name

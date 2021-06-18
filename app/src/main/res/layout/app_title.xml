@@ -49,7 +49,6 @@
             android:layout_margin="5dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_notify" />
 
         <ImageView
@@ -59,7 +58,6 @@
             android:layout_margin="5dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_search2" />
 
         <ImageView
@@ -69,7 +67,6 @@
             android:layout_margin="5dp"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_account" />
     </LinearLayout>
 

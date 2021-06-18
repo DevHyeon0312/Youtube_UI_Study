@@ -12,6 +12,7 @@ import com.devhyeon.youtubelayout.constant.LOCKER_FRAGMENT
 import com.devhyeon.youtubelayout.constant.SEARCH_FRAGMENT
 import kotlinx.coroutines.launch
 
+/** BottomNavigation Click Event 를 처리하기 위한 ViewModel */
 class BottomNavigationViewModel: ViewModel() {
     //보여줘야 하는 프래그먼트
     private val _selectFragmentTAG = MutableLiveData<Int>().apply { HOME_FRAGMENT }
