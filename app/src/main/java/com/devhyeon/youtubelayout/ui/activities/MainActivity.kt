@@ -36,10 +36,13 @@ class MainActivity : AppCompatActivity() {
     private val searchFragment      by lazy { SearchFragment() }
     private val favoriteFragment    by lazy { FavoriteFragment() }
     private val lockerFragment      by lazy { LockerFragment() }
+    private val fragmentManager =  supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        addFragment()
 
         bottomNavigationVM.initNavigation()
     }
@@ -56,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         with(bottomNavigationVM) {
             selectFragmentTAG.observe(this@MainActivity, Observer {
                 it?.let { fragmentId -> selectFragment(fragmentId) }
+                binding.appBarLayout.setExpanded(true)
             })
         }
     }
@@ -78,8 +82,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** 프래그먼트 등록 */
+    private fun addFragment() {
+        fragmentManager.beginTransaction().add(R.id.fl_container, homeFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, searchFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, favoriteFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, lockerFragment).commit()
+    }
+
     /** 프래그먼트 교체 */
     private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
+        fragmentManager.fragments.forEach {
+            if(it != fragment) {
+                fragmentManager.beginTransaction().hide(it).commit()
+            }
+        }
+        fragmentManager.beginTransaction().show(fragment).commit()
     }
 }

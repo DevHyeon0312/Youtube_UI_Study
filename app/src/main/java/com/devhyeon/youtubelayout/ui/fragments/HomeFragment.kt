@@ -23,6 +23,7 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        println("CREATED")
         return binding.root
     }
 
