@@ -11,10 +11,7 @@ import com.devhyeon.youtubelayout.constant.HOME_FRAGMENT
 import com.devhyeon.youtubelayout.constant.LOCKER_FRAGMENT
 import com.devhyeon.youtubelayout.constant.SEARCH_FRAGMENT
 import com.devhyeon.youtubelayout.databinding.ActivityMainBinding
-import com.devhyeon.youtubelayout.ui.fragments.FavoriteFragment
-import com.devhyeon.youtubelayout.ui.fragments.HomeFragment
-import com.devhyeon.youtubelayout.ui.fragments.LockerFragment
-import com.devhyeon.youtubelayout.ui.fragments.SearchFragment
+import com.devhyeon.youtubelayout.ui.fragments.*
 import com.devhyeon.youtubelayout.viewmodels.BottomNavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private val searchFragment      by lazy { SearchFragment() }
     private val favoriteFragment    by lazy { FavoriteFragment() }
     private val lockerFragment      by lazy { LockerFragment() }
+    private val videoFragment       by lazy { VideoFragment() }
     private val fragmentManager =  supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         with(bottomNavigationVM) {
             selectFragmentTAG.observe(this@MainActivity, Observer {
                 it?.let { fragmentId -> selectFragment(fragmentId) }
-                binding.appBarLayout.setExpanded(true)
+//                binding.appBarLayout.setExpanded(true)
             })
         }
     }
@@ -88,15 +86,23 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.beginTransaction().add(R.id.fl_container, searchFragment).commit()
         fragmentManager.beginTransaction().add(R.id.fl_container, favoriteFragment).commit()
         fragmentManager.beginTransaction().add(R.id.fl_container, lockerFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.container,videoFragment).commit()
     }
 
     /** 프래그먼트 교체 */
     private fun changeFragment(fragment: Fragment) {
-        fragmentManager.fragments.forEach {
-            if(it != fragment) {
-                fragmentManager.beginTransaction().hide(it).commit()
-            }
-        }
+//        fragmentManager.fragments.forEach {
+//            if(it != fragment) {
+//                fragmentManager.beginTransaction().hide(it).commit()
+//            }
+//        }
+
+        fragmentManager.beginTransaction().hide(homeFragment).commit()
+        fragmentManager.beginTransaction().hide(searchFragment).commit()
+        fragmentManager.beginTransaction().hide(favoriteFragment).commit()
+        fragmentManager.beginTransaction().hide(lockerFragment).commit()
+
+        fragmentManager.beginTransaction().show(videoFragment).commit()
         fragmentManager.beginTransaction().show(fragment).commit()
     }
 }

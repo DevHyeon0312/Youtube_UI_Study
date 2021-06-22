@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mainMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:context=".ui.activities.MainActivity">
+        app:layoutDescription="@xml/main_scene">
+
+        <View
+            android:id="@+id/backgroundDim"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="10dp" />
+
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/dark_over">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_scrollFlags="scroll|enterAlways"
-                android:fitsSystemWindows="true">
-
-                <include
-                    android:id="@+id/toolBar"
-                    layout="@layout/app_title"/>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <include
+                android:id="@+id/toolBar"
+                layout="@layout/app_title"/>
 
         </com.google.android.material.appbar.AppBarLayout>
 
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fl_container"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.fragment.app.FragmentContainerView>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"/>
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:backgroundTint="@color/dark_over"
-            android:layout_gravity="bottom">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_gravity="bottom"
+            tools:ignore="BottomAppBar">
 
             <com.devhyeon.youtubelayout.customviews.YoutubeBottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="55dp"
                 android:layout_marginEnd="16dp"
                 app:elevation="0dp"
                 app:itemIconTint="@color/white"
@@ -56,7 +63,6 @@
                 app:menu="@menu/bottom_nav_menu" />
 
         </com.google.android.material.bottomappbar.BottomAppBar>
-
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -68,8 +74,18 @@
             android:scaleType="center"
             app:maxImageSize="45dp"
             android:src="@drawable/ic_add"
-            app:layout_anchor="@id/bottomAppBar" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
