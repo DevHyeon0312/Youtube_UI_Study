@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         with(bottomNavigationVM) {
             selectFragmentTAG.observe(this@MainActivity, Observer {
                 it?.let { fragmentId -> selectFragment(fragmentId) }
-//                binding.appBarLayout.setExpanded(true)
+                binding.appBar.setExpanded(true)
             })
         }
     }
@@ -91,16 +91,11 @@ class MainActivity : AppCompatActivity() {
 
     /** 프래그먼트 교체 */
     private fun changeFragment(fragment: Fragment) {
-//        fragmentManager.fragments.forEach {
-//            if(it != fragment) {
-//                fragmentManager.beginTransaction().hide(it).commit()
-//            }
-//        }
-
-        fragmentManager.beginTransaction().hide(homeFragment).commit()
-        fragmentManager.beginTransaction().hide(searchFragment).commit()
-        fragmentManager.beginTransaction().hide(favoriteFragment).commit()
-        fragmentManager.beginTransaction().hide(lockerFragment).commit()
+        fragmentManager.fragments.forEach {
+            if(it != fragment) {
+                fragmentManager.beginTransaction().hide(it).commit()
+            }
+        }
 
         fragmentManager.beginTransaction().show(videoFragment).commit()
         fragmentManager.beginTransaction().show(fragment).commit()
