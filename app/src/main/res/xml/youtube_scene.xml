@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
 
     <Transition
-        app:constraintSetEnd="@id/expanded"
         app:constraintSetStart="@id/collapsed"
+        app:constraintSetEnd="@id/expanded"
         app:duration="300"
         app:motionInterpolator="easeInOut">
 
@@ -20,7 +21,7 @@
                 app:motionTarget="@id/videoView">
                 <CustomAttribute
                     app:attributeName="EndPadding"
-                    app:customDimension="250dp" />
+                    app:customDimension="300dp" />
             </KeyAttribute>
 
             <KeyAttribute
@@ -57,9 +58,21 @@
                     app:customDimension="0dp" />
             </KeyAttribute>
 
+
+            <KeyAttribute
+                android:alpha="0.10"
+                motion:framePosition="1"
+                motion:motionTarget="@id/image_clear" />
+
+            <KeyAttribute
+                android:alpha="0.10"
+                motion:framePosition="1"
+                motion:motionTarget="@id/image_play" />
+
         </KeyFrameSet>
     </Transition>
 
+    <!-- END(확대) -->
     <ConstraintSet android:id="@+id/expanded">
 
         <Constraint
@@ -83,15 +96,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/videoViewContainer" />
 
+        <Constraint android:id="@id/image_play">
+            <PropertySet android:alpha="0" />
+        </Constraint>
+
+        <Constraint android:id="@id/image_clear">
+            <PropertySet android:alpha="0" />
+        </Constraint>
     </ConstraintSet>
 
+    <!-- START(축소) -->
     <ConstraintSet android:id="@+id/collapsed">
 
         <Constraint
             android:id="@id/videoViewContainer"
             android:layout_height="55dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="65dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -101,14 +120,19 @@
             android:id="@id/content"
             android:layout_width="match_parent"
             android:layout_height="-1dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="66dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/videoViewContainer" />
 
+        <Constraint android:id="@id/image_play">
+            <PropertySet android:alpha="1" />
+        </Constraint>
+
+        <Constraint android:id="@id/image_clear">
+            <PropertySet android:alpha="1" />
+        </Constraint>
     </ConstraintSet>
 
 </MotionScene>

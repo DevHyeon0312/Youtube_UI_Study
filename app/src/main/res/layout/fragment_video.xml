@@ -11,15 +11,15 @@
         app:layoutDescription="@xml/youtube_scene"
         app:layout_collapseMode="parallax">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/videoViewContainer"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="320dp"
+            android:background="@color/dark_over"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.devhyeon.youtubelayout.customviews.VideoView
             android:id="@+id/videoView"
@@ -27,14 +27,37 @@
             android:layout_height="0dp"
             android:layout_marginEnd="0dp"
             android:contentDescription="@null"
-            android:elevation="10dp"
-            android:paddingEnd="250dp"
+            android:elevation="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/cat_1"
             app:layout_constraintBottom_toBottomOf="@+id/videoViewContainer"
             app:layout_constraintEnd_toEndOf="@+id/videoViewContainer"
             app:layout_constraintStart_toStartOf="@+id/videoViewContainer"
             app:layout_constraintTop_toTopOf="@+id/videoViewContainer" />
+
+        <ImageView
+            android:id="@+id/image_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:alpha="0"
+            app:srcCompat="@drawable/ic_play_arrow_32"
+            app:layout_constraintEnd_toStartOf="@id/image_clear"
+            app:layout_constraintTop_toTopOf="@id/videoViewContainer"
+            app:layout_constraintBottom_toBottomOf="@id/videoViewContainer"
+            />
+
+        <ImageView
+            android:id="@+id/image_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:alpha="0"
+            app:srcCompat="@drawable/ic_clear_32"
+            app:layout_constraintEnd_toEndOf="@id/videoViewContainer"
+            app:layout_constraintBottom_toBottomOf="@id/videoViewContainer"
+            app:layout_constraintTop_toTopOf="@id/videoViewContainer"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content"
