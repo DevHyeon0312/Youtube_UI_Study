@@ -5,24 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.devhyeon.youtubelayout.databinding.FragmentLockerBinding
+import com.devhyeon.youtubelayout.databinding.FragmentBottomdrawerBinding
+import com.devhyeon.youtubelayout.databinding.FragmentHomeBinding
 
-/** 보관함 Fragment */
-class LockerFragment: Fragment() {
-    companion object {
-        private val TAG = LockerFragment::class.java.name
-    }
-
-    //바인딩
-    private var _binding: FragmentLockerBinding? = null
+class BottomDrawerFragment: Fragment() {
+    private var _binding: FragmentBottomdrawerBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentLockerBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentBottomdrawerBinding.inflate(inflater, container, false)
         return binding.root
     }
 

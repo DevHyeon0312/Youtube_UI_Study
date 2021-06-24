@@ -68,4 +68,9 @@ class VideoFragment : Fragment() {
     fun showFullScreen() {
         binding.videoMotionLayout.transitionToEnd()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

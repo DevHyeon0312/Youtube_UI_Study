@@ -2,6 +2,7 @@ package com.devhyeon.youtubelayout.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +15,8 @@ import com.devhyeon.youtubelayout.data.VideoListItem
 import com.devhyeon.youtubelayout.databinding.ActivityMainBinding
 import com.devhyeon.youtubelayout.ui.fragments.*
 import com.devhyeon.youtubelayout.viewmodels.BottomNavigationViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import lib.bottomupdrawer.BasicBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /** 메인 Activity */
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private val favoriteFragment    by lazy { FavoriteFragment() }
     private val lockerFragment      by lazy { LockerFragment() }
     private val videoFragment       by lazy { VideoFragment() }
+    private val bottomDrawerFragment by lazy { BottomDrawerFragment() }
     private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +75,44 @@ class MainActivity : AppCompatActivity() {
         videoFragment.onShow = {
             show()
         }
+
+        val callback = (object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {}
+                    BottomSheetBehavior.STATE_EXPANDED -> {}
+                    BottomSheetBehavior.STATE_DRAGGING -> { }
+                    BottomSheetBehavior.STATE_SETTLING -> {}
+                    BottomSheetBehavior.STATE_HIDDEN -> {
+                        binding.bottomBack.visibility = View.GONE
+                        binding.fab.isEnabled=true
+                    }
+                    else -> {}
+                }
+            }
+        })
+
+        val bottomSheet = BasicBottomSheet
+            .Begin(this@MainActivity)
+            .hide(true)
+            .addCallBack(callback)
+            .addContents(bottomDrawerFragment)
+            .hidden(true)
+            .commit()
+
+        binding.bottomBack.setOnClickListener {
+            binding.bottomBack.visibility = View.GONE
+            bottomSheet.hidden(true)
+        }
+
+        binding.fab.setOnClickListener {
+            binding.fab.isEnabled=false
+            binding.bottomBack.visibility = View.VISIBLE
+            bottomSheet.hidden(false)
+        }
     }
 
     /** 프래그먼트 결정 */
@@ -104,7 +146,7 @@ class MainActivity : AppCompatActivity() {
     private fun changeFragment(fragment: Fragment) {
         println(fragment)
         fragmentManager.fragments.forEach {
-            if(it != fragment && it != videoFragment) {
+            if(it != fragment && it != videoFragment && it != bottomDrawerFragment) {
                 fragmentManager.beginTransaction().hide(it).commit()
             }
         }
