@@ -10,6 +10,7 @@ import com.devhyeon.youtubelayout.constant.FAVORITE_FRAGMENT
 import com.devhyeon.youtubelayout.constant.HOME_FRAGMENT
 import com.devhyeon.youtubelayout.constant.LOCKER_FRAGMENT
 import com.devhyeon.youtubelayout.constant.SEARCH_FRAGMENT
+import com.devhyeon.youtubelayout.data.VideoListItem
 import com.devhyeon.youtubelayout.databinding.ActivityMainBinding
 import com.devhyeon.youtubelayout.ui.fragments.*
 import com.devhyeon.youtubelayout.viewmodels.BottomNavigationViewModel
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private val favoriteFragment    by lazy { FavoriteFragment() }
     private val lockerFragment      by lazy { LockerFragment() }
     private val videoFragment       by lazy { VideoFragment() }
-    private val fragmentManager =  supportFragmentManager
+    private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +61,16 @@ class MainActivity : AppCompatActivity() {
                 binding.appBar.setExpanded(true)
             })
         }
+
+        homeFragment.adapter.onClick = {
+            show(it)
+        }
+        videoFragment.onHide = {
+            hide()
+        }
+        videoFragment.onShow = {
+            show()
+        }
     }
 
     /** 프래그먼트 결정 */
@@ -82,22 +93,37 @@ class MainActivity : AppCompatActivity() {
 
     /** 프래그먼트 등록 */
     private fun addFragment() {
-        fragmentManager.beginTransaction().add(R.id.fl_container, homeFragment).commit()
-        fragmentManager.beginTransaction().add(R.id.fl_container, searchFragment).commit()
-        fragmentManager.beginTransaction().add(R.id.fl_container, favoriteFragment).commit()
-        fragmentManager.beginTransaction().add(R.id.fl_container, lockerFragment).commit()
-        fragmentManager.beginTransaction().add(R.id.container,videoFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, homeFragment).hide(videoFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, searchFragment).hide(videoFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, favoriteFragment).hide(videoFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.fl_container, lockerFragment).hide(videoFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.container,videoFragment).hide(videoFragment).commit()
     }
 
     /** 프래그먼트 교체 */
     private fun changeFragment(fragment: Fragment) {
+        println(fragment)
         fragmentManager.fragments.forEach {
-            if(it != fragment) {
+            if(it != fragment && it != videoFragment) {
                 fragmentManager.beginTransaction().hide(it).commit()
             }
         }
 
-        fragmentManager.beginTransaction().show(videoFragment).commit()
         fragmentManager.beginTransaction().show(fragment).commit()
+    }
+
+    private fun show(video: VideoListItem) {
+        fragmentManager.beginTransaction().show(videoFragment).commit()
+        videoFragment.setItem(video)
+        videoFragment.showFullScreen()
+    }
+
+    private fun show() {
+        fragmentManager.beginTransaction().show(videoFragment).commit()
+        videoFragment.showFullScreen()
+    }
+
+    private fun hide() {
+        fragmentManager.beginTransaction().hide(videoFragment).commit()
     }
 }

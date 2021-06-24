@@ -13,6 +13,7 @@ import com.devhyeon.youtubelayout.databinding.ListVideoItemBinding
 
 class VideoListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var videoList: MutableList<VideoListItem> = mutableListOf()
+    var onClick: (VideoListItem) -> Unit = {}
 
     fun addItems(items: List<VideoListItem>) {
         videoList.clear()
@@ -43,6 +44,8 @@ class VideoListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 .centerCrop()
                 .transition(DrawableTransitionOptions.withCrossFade(100))
                 .into(viewDataBinding.imageView)
+
+            viewDataBinding.container.setOnClickListener{onClick(video)}
         }
     }
 }
