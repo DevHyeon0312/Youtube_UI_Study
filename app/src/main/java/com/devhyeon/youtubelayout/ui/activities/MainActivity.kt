@@ -11,12 +11,12 @@ import com.devhyeon.youtubelayout.constant.FAVORITE_FRAGMENT
 import com.devhyeon.youtubelayout.constant.HOME_FRAGMENT
 import com.devhyeon.youtubelayout.constant.LOCKER_FRAGMENT
 import com.devhyeon.youtubelayout.constant.SEARCH_FRAGMENT
+import com.devhyeon.youtubelayout.customviews.BasicBottomSheet
 import com.devhyeon.youtubelayout.data.VideoListItem
 import com.devhyeon.youtubelayout.databinding.ActivityMainBinding
 import com.devhyeon.youtubelayout.ui.fragments.*
 import com.devhyeon.youtubelayout.viewmodels.BottomNavigationViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import lib.bottomupdrawer.BasicBottomSheet
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /** 메인 Activity */
@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         addFragment()
 
@@ -84,9 +85,10 @@ class MainActivity : AppCompatActivity() {
                 when (newState) {
                     BottomSheetBehavior.STATE_COLLAPSED -> {}
                     BottomSheetBehavior.STATE_EXPANDED -> {}
-                    BottomSheetBehavior.STATE_DRAGGING -> { }
+                    BottomSheetBehavior.STATE_DRAGGING -> {}
                     BottomSheetBehavior.STATE_SETTLING -> {}
                     BottomSheetBehavior.STATE_HIDDEN -> {
+                        binding.container.visibility = View.VISIBLE
                         binding.bottomBack.visibility = View.GONE
                         binding.fab.isEnabled=true
                     }
@@ -104,11 +106,13 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         binding.bottomBack.setOnClickListener {
+            binding.container.visibility = View.VISIBLE
             binding.bottomBack.visibility = View.GONE
             bottomSheet.hidden(true)
         }
 
         binding.fab.setOnClickListener {
+            binding.container.visibility = View.GONE
             binding.fab.isEnabled=false
             binding.bottomBack.visibility = View.VISIBLE
             bottomSheet.hidden(false)
