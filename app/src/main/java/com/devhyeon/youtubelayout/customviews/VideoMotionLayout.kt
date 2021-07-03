@@ -11,6 +11,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.devhyeon.youtubelayout.R
 
+/** VideoMotionLayout */
 class VideoMotionLayout(context: Context, attributeSet: AttributeSet? = null) : MotionLayout(context, attributeSet) {
 
     private val viewToDetectTouch by lazy {
